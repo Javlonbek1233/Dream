@@ -1,0 +1,10 @@
+{
+  "name": "DreamScape AI",
+  "description": "A futuristic AI-powered dream journal that transforms your subconscious into cinematic visual experiences using AI storytelling and 3D visualization.",
+  "requestFramePermissions": [
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

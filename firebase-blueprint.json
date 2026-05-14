@@ -1,0 +1,74 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "User profile and settings",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "email": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "lastActive": { "type": "string", "format": "date-time" },
+        "settings": {
+          "type": "object",
+          "properties": {
+            "nightMode": { "type": "boolean" },
+            "privacyDefault": { "type": "string", "enum": ["private", "public"] }
+          }
+        }
+      },
+      "required": ["uid", "email"]
+    },
+    "Dream": {
+      "title": "Dream Entry",
+      "description": "A single dream journal entry",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "content": { "type": "string", "description": "The raw description of the dream" },
+        "analysis": {
+          "type": "object",
+          "properties": {
+            "emotions": { "type": "array", "items": { "type": "string" } },
+            "meaning": { "type": "string" },
+            "category": { "type": "string" },
+            "story": { "type": "string", "description": "AI-generated cinematic story version" },
+            "visualPrompt": { "type": "string", "description": "Optimized prompt for image generation" }
+          }
+        },
+        "visualization": {
+          "type": "object",
+          "properties": {
+            "imageUrl": { "type": "string" },
+            "generatedAt": { "type": "string", "format": "date-time" }
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "timestamp": { "type": "string", "format": "date-time" },
+            "isPublic": { "type": "boolean" },
+            "isFavorite": { "type": "boolean" },
+            "mood": { "type": "integer", "description": "Scale 1-10" }
+          }
+        }
+      }
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles"
+    },
+    "/dreams/{dreamId}": {
+      "schema": "Dream",
+      "description": "Dream journal entries"
+    },
+    "/community_dreams/{dreamId}": {
+      "schema": "Dream",
+      "description": "Publicly shared dreams"
+    }
+  }
+}
